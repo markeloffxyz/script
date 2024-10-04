@@ -7,19 +7,31 @@ local AUTOTab = Window:MakeTab({
     PremiumOnly = false
 })
 
+local autoClick = false -- Auto Click kontrol değişkeni
+
 AUTOTab:AddToggle({
     Name = "Auto Click",
     Default = false,
     Callback = function(Value)
-while wait(0.1) do
-        game:GetService("ReplicatedStorage")["events-shared/network@GlobalEvents"].placeBlock:FireServer()
+        autoClick = Value -- Toggle değeri güncelleniyor
+        while autoClick do
+            wait(0.1)
+            game:GetService("ReplicatedStorage")["events-shared/network@GlobalEvents"].placeBlock:FireServer()
+        end
     end
 })
 
+local autoRebirth = false -- Auto Rebirth kontrol değişkeni
+
 AUTOTab:AddToggle({
-	Name = "Auto Rebirth",
-	Default = false,
-	Callback = function(Value)
-		game:GetService("ReplicatedStorage")["functions-shared/network@GlobalFunctions"]["s:rebirth"]:FireServer(12)
-	end    
+    Name = "Auto Rebirth",
+    Default = false,
+    Callback = function(Value)
+        autoRebirth = Value -- Toggle değeri güncelleniyor
+        while autoRebirth do
+            wait(1) -- Rebirth işleminde 1 saniyelik gecikme
+            game:GetService("ReplicatedStorage")["functions-shared/network@GlobalFunctions"]["s:rebirth"]:FireServer(12)
+        end
+    end    
 })
+
