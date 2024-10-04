@@ -11,7 +11,7 @@ AUTOTab:AddToggle({
     Name = "Auto Click",
     Default = false,
     Callback = function(Value)
-whale wait(0.1) do
+while wait(0.1) do
         game:GetService("ReplicatedStorage")["events-shared/network@GlobalEvents"].placeBlock:FireServer()
     end
 })
